@@ -35,9 +35,9 @@ public class CustomerController {
 	}
 
 	@GetMapping("/{id}")
-	public Customer findById(@PathVariable Long id) {
-		return service.findById(id)
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Customer not found"));
+	public ResponseEntity<Customer> findById(@PathVariable Long id) {
+		Customer obj = service.findById(id);
+		return ResponseEntity.ok(obj);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
@@ -47,4 +47,11 @@ public class CustomerController {
 		return ResponseEntity.created(uri).build();
 	}
 
+	
+	@RequestMapping(value = "/{id}", method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody Customer obj, @PathVariable Long id) {
+		obj.setId(id);
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
+	}
 }

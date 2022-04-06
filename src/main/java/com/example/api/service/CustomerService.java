@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.api.domain.Customer;
 import com.example.api.repository.CustomerRepository;
+import com.example.api.service.exceptions.ObjectNotFoundException;
 
 @Service
 public class CustomerService {
@@ -23,8 +24,10 @@ public class CustomerService {
 		return repository.findAllByOrderByNameAsc();
 	}
 
-	public Optional<Customer> findById(Long id) {
-		return repository.findById(id);
+	public Customer findById(Long id) {
+		Optional<Customer> obj = repository.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Customer.class.getName()));
 	}
 	
 
@@ -32,4 +35,17 @@ public class CustomerService {
 		return repository.save(obj);
 	}
 
+	public Customer update(Customer obj) {
+		Customer newObj = findById(obj.getId());
+		updateData(newObj, obj);
+		return repository.save(newObj);
+	}
+	
+	private void updateData(Customer newObj, Customer obj) {
+		newObj.setName(obj.getName());
+		newObj.setEmail(obj.getEmail());
+	}
+	
+
+	
 }
