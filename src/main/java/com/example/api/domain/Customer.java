@@ -8,19 +8,23 @@ import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Length;
+
 @Entity
 public class Customer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private Long id;
 
 	@Column(nullable = false)
-	@NotEmpty
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String name;
 
 	@Column(nullable = false)
-	@NotEmpty
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Length(min=5, max=80, message="Tamanho deve ter entre 5 e 80 caracteres")
 	@Email
 	private String email;
 
