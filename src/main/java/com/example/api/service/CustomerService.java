@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.example.api.domain.Customer;
@@ -20,9 +22,9 @@ public class CustomerService {
 	public CustomerService(CustomerRepository repository) {
 		this.repository = repository;
 	}
-
+	
 	public List<Customer> findAll() {
-		return repository.findAllByOrderByNameAsc();
+		return repository.findAll();
 	}
 
 	public Customer findById(Long id) {
@@ -58,7 +60,10 @@ public class CustomerService {
 //		}
 	}
 
-	
+	public Page<Customer> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+		PageRequest pageRequest = PageRequest.of(page , linesPerPage, Direction.valueOf(direction), orderBy);
+		return repository.findAll(pageRequest);
+	}
 	
 	
 }
