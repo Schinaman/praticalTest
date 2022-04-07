@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.api.domain.Address;
+import com.example.api.dto.AddressDTO;
 import com.example.api.service.AddressService;
 
 @RestController
@@ -40,7 +41,8 @@ public class AddressController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody Address obj) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody AddressDTO objDto) {
+		Address obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
@@ -48,7 +50,8 @@ public class AddressController {
 
 	
 	@RequestMapping(value = "/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Address obj, @PathVariable Long id) {
+	public ResponseEntity<Void> update(@RequestBody AddressDTO objDto, @PathVariable Long id) {
+		Address obj = service.fromDTO(objDto);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();

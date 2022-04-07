@@ -49,15 +49,11 @@ public class CustomerService {
 		newObj.setEmail(obj.getEmail());
 	}
 
-	// deleção exclui endereços vinculados
+
 	public void delete(Long id) {
 		findById(id);
-//		try {
 		repository.deleteById(id);
-//		}
-//		catch (DataIntegrityViolationException e) {
-//			throw new DataIntegrityException("Não é possível excluir uma cliente que possui endereços");
-//		}
+
 	}
 
 	public Page<Customer> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
