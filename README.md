@@ -5,7 +5,7 @@
 Objetivo deste projeto é documentar o relacionamento entre entidade Customer e Address. <br>
 A construção do projeto foi feita arquitetura Rest seguindo o padrão MVC. <br>
 Tecnologia utilizada: Java, Spring, Maven, JPA Hibernate, H2 Database.
-É possível acompanhar o modelo conceitual abaixo:
+É possível acompanhar o modelo conceitual abaixo:<br>
 ![alt text](https://github.com/Schinaman/praticalTest/blob/master/modeloConceitual.png)
 
 ### Endpoints
