@@ -1,15 +1,20 @@
-# Custumer Service
+# Pratical test
 
-### Requisitos
+### Overview
 
-1. JDK 8
-1. Maven 3
+Objetivo deste projeto é documentar o relacionamento entre entidade Customer e Address. <br>
+A construção do projeto foi feita arquitetura Rest seguindo o padrão MVC. <br>
+Tecnologia utilizada: Java, Spring, Maven, JPA Hibernate, H2 Database.
+É possível acompanhar o modelo conceitual abaixo:
+![alt text](https://github.com/Schinaman/praticalTest/blob/master/modeloConceitual.png)
 
-### Rodando
+### Endpoints
+Endpoints genéricos para cada uma das entidades: <br>
+1. Customer: `http://localhost:8080/customers/` <br>
+2. Address: `http://localhost:8080/addresses/` <br>
+Mais detalhes das requisições e endpoints na collection json vinculada na raíz do projeto
 
-1. Clone o projeto: `https://github.com/leonardohenrique/tokio-test.git`
-1. Entre na pasta `tokio-test` e execute: `mvn spring-boot:run`
-1. Acesse: `http://localhost:8080/customers`
+
 
 
 
